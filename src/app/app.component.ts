@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {populateLocalStorage} from "./shared/utils/utils";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'hookah-app';
+
+  ngOnInit(){
+    populateLocalStorage();
+  }
 }

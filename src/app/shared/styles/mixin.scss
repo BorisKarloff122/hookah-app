@@ -1,0 +1,20 @@
+@import "src/app/shared/styles/variables.scss";
+
+@mixin flex-box($align, $justify, $direction: null, $wrap:null){
+  @if($wrap){
+    flex-wrap: wrap;
+  }
+
+  @if($direction){
+    flex-direction: $direction;
+  }
+
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin main-font($size){
+  color:$main-font-color;
+  font-size:$size;
+}

@@ -1,1 +1,44 @@
-<p>login-form works!</p>
+<div class="form-container">
+  <div class="form-header">
+    <h1>{{translations.loginFormHeader}}</h1>
+    <div class="sub-header">
+      {{translations.loginSubHeader}}
+    </div>
+    <div class="err-msg"></div>
+  </div>
+  <div class="form" [formGroup]="form!">
+    <mat-form-field>
+      <input formControlName="login" matInput type="text" >
+      <mat-error *ngIf="getControl(form, 'login').invalid">
+        <div class="error-container">
+          <div class="error length-err"
+               *ngIf="getControl(form,'login').value.toString().length > 0 &&
+               getControl(form,'login').value.toString().length < loginMinLength" >
+            Login cannot be shorter that {{loginMinLength}} chars
+          </div>
+          <div class="error empty-err"
+               *ngIf="getControl(form,'login').value.toString().length === 0">
+           {{errMessagesFormat(errMessages.loginLengthErr, loginMinLength)}}
+          </div>
+        </div>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <div class="field-container">
+        <input matInput
+               formControlName="password"
+               type="{{showPassword ? 'text' : 'password'}}">
+        <mat-icon class="icon"
+                  (click)="toggleShowPassword()">{{showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </div>
+      <mat-error *ngIf="getControl(form, 'password').invalid">
+        <div class="error-container">
+          <div class="error empty-err">{{errMessages.passwordEmpty}}</div>
+        </div>
+      </mat-error>
+    </mat-form-field>
+    <div class="button-container">
+      <button mat-button (click)="submitForm()">{{translations.logInButtonText}}</button>
+    </div>
+  </div>
+</div>
